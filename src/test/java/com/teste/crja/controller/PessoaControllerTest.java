@@ -26,7 +26,7 @@ import com.teste.crja.repositories.PessoaRepository;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-@DisplayName("PessoaControllerTest")
+@DisplayName("Pessoa Controller Test")
 public class PessoaControllerTest {
 	@Autowired
 	private MockMvc mockMvc;
