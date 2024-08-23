@@ -1,7 +1,6 @@
 package com.teste.crja.dto;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
@@ -27,33 +26,31 @@ import lombok.NoArgsConstructor;
 public class TarefaDTO {
 	private int id;
 
-	@NotBlank(message="Titulo da tarefa não pode ser vazio!")
+	@NotBlank(message = "Titulo da tarefa não pode ser vazio!")
 	private String titulo;
-	
-	@NotBlank(message="A descrição da tarefa não pode ser vazia!")
+
+	@NotBlank(message = "A descrição da tarefa não pode ser vazia!")
 	private String descricao;
-	
+
 	@JsonDeserialize(using = LocalDateDeserializer.class)
 	@JsonSerialize(using = LocalDateSerializer.class)
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate prazo;
-	
+
 	@ManyToOne
 	private DepartamentoEntity departamento;
 
 	private int duracaoTarefa;
-	
+
 	@ManyToOne
 	private PessoaEntity pessoa; // pessoa alocada
-	
+
 	private Boolean finalizado = false;
-	
 
 	public TarefaEntity toEntity() {
 		ModelMapper mapper = new ModelMapper();
 
 		return mapper.map(this, TarefaEntity.class);
 	}
-
 
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.teste.crja.dto.PessoaDTO;
 import com.teste.crja.entity.PessoaEntity;
+import com.teste.crja.horas.PessoaHorasDTO;
 import com.teste.crja.service.PessoaService;
 
 @RestController
@@ -32,6 +33,12 @@ public class PessoaController {
 	@GetMapping("{id}")
 	public PessoaEntity getOne(@PathVariable Integer id) {
 		return pessoaService.getOne(id);
+	}
+	
+	// Listar pessoas trazendo nome, departamento, total horas gastas nas tarefas
+	@GetMapping("get/pessoas")
+	public ResponseEntity<List<PessoaHorasDTO>> listarPessoas() {
+		return ResponseEntity.ok(pessoaService.listarPessoas());
 	}
 
 	@PostMapping()
