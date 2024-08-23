@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.ValidationException;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.server.ResponseStatusException;
 
-import com.teste.crja.dto.AlocarPessoaTarefa;
-import com.teste.crja.dto.TarefaConcluidaDTO;
 import com.teste.crja.dto.TarefaDTO;
+import com.teste.crja.entity.PessoaEntity;
 import com.teste.crja.entity.TarefaEntity;
-import com.teste.crja.mapper.TarefaMapper;
 import com.teste.crja.repositories.PessoaRepository;
 import com.teste.crja.repositories.TarefaRepository;
 
@@ -23,9 +22,7 @@ public class TarefaService {
 	private TarefaRepository tarefaRepository;
 	@Autowired
 	private PessoaRepository pessoaRepository;
-    @Autowired
-    private TarefaMapper tarefaMapper;
-    
+
 	public List<TarefaDTO> getAll() {
 		List<TarefaEntity> list = tarefaRepository.findAll();
 		List<TarefaDTO> listDTO = new ArrayList<>();
@@ -39,13 +36,13 @@ public class TarefaService {
 	public TarefaDTO save(TarefaEntity tarefa) {
 		return tarefaRepository.save(tarefa).toDTO();
 	}
-	
+
 	public TarefaDTO update(int id, TarefaEntity newTarefa) {
 		Optional<TarefaEntity> tarefaBD = tarefaRepository.findById(id);
-		
-		if(tarefaBD.isPresent()) {
+
+		if (tarefaBD.isPresent()) {
 			TarefaEntity tarefa = tarefaBD.get();
-			
+
 			tarefa.setTitulo(newTarefa.getTitulo());
 			tarefa.setDescricao(newTarefa.getDescricao());
 			tarefa.setPrazo(newTarefa.getPrazo());
@@ -53,35 +50,43 @@ public class TarefaService {
 			tarefa.setDuracaoTarefa(newTarefa.getDuracaoTarefa());
 			tarefa.setPessoa(newTarefa.getPessoa());
 			tarefa.setFinalizado(newTarefa.getFinalizado());
-			
+
 			return tarefaRepository.save(tarefa).toDTO();
-		}else {
+		} else {
 			return new TarefaEntity().toDTO();
 		}
 	}
-	
-	//Alocar pessoas
-	public TarefaDTO alocarPessoaNaTarefa(int id, AlocarPessoaTarefa alocaPessoa) {
-		if(!tarefaRepository.existsById(id)){
-			throw new ValidationException("Id da tarefa informada não exite");
+
+	// Alocar pessoas
+	public Optional<TarefaDTO> alocarPessoaTarefa(@RequestBody TarefaDTO alocarDTO, int id) {
+		TarefaEntity tarefa = tarefaRepository.getById(alocarDTO.getId());
+		PessoaEntity pessoa = pessoaRepository.getById(id);
+
+		if (tarefaRepository.findById(id).isPresent() && pessoaRepository.findById(id).isPresent()
+				&& tarefa.getDepartamento() == pessoa.getDepartamento()) {
+			tarefa.setPessoa(pessoa);
+			tarefaRepository.save(tarefa);
+			return Optional.of(alocarDTO);
+		} else {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+					"Possiveis erros: Departamentos diferentes ou não encontrado pessoa/tarefa!!");
 		}
-		
-		if(!pessoaRepository.existsById(alocaPessoa.idPessoa())) {
-			throw new ValidationException("Id da pessoa informada não existe");
-		}
-		
-		var pessoa = pessoaRepository.findById(alocaPessoa.idPessoa()).get();
-		var tarefa = tarefaRepository.findById(id).get();
-		
-		if(pessoa.getDepartamento().getId() != tarefa.getDepartamento().getId()) {
-			throw new ValidationException("O departamento da tarefa não é o mesmo departamento da pessoa selecionada.");
-		}
-		
-		tarefa.setPessoa(pessoa);
-		
-		return tarefaMapper.toDTO(tarefaRepository.save(tarefa));
 	}
 	
-
+	//Finalizar tarefa
+	public Optional<Integer> finalizarTarefa(int finalizarTarefa){
+		if(tarefaRepository.findById(finalizarTarefa).isPresent()) {
+			TarefaEntity tarefa = tarefaRepository.getById(finalizarTarefa);
+			tarefa.setFinalizado(true);
+			tarefaRepository.save(tarefa);
+			return Optional.of(finalizarTarefa);
+		}else {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID da tarefa não localizado!");
+		}
+	}
+	
+	public void delete(int id) {
+		tarefaRepository.deleteById(id);
+	}
 
 }

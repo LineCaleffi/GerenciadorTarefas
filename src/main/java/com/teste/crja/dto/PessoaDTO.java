@@ -24,7 +24,6 @@ public class PessoaDTO {
 	private int id;
 	private String name;
 	
-	@JsonIgnore
 	@JoinColumn(name = "departamento_id")
 	@ManyToOne
 	private DepartamentoEntity departamento;
