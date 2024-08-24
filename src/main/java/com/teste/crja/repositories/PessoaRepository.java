@@ -11,5 +11,5 @@ import com.teste.crja.entity.PessoaEntity;
 
 @Repository
 public interface PessoaRepository extends JpaRepository<PessoaEntity, Integer> {
-
+	
 }

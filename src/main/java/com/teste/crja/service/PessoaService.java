@@ -11,7 +11,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.teste.crja.dto.PesquisarPrazoDTO;
 import com.teste.crja.dto.PessoaDTO;
+import com.teste.crja.dto.PessoaGastosDTO;
 import com.teste.crja.entity.PessoaEntity;
 import com.teste.crja.horas.PessoaHorasDTO;
 import com.teste.crja.repositories.PessoaRepository;
@@ -61,5 +63,6 @@ public class PessoaService {
 				.collect(Collectors.toList());
 		return PessoaHorasDTO;
 	}
-
+	
+	
 }
