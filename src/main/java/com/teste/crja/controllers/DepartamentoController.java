@@ -40,5 +40,5 @@ public class DepartamentoController {
 	@GetMapping("get/departamentos")
 	public ResponseEntity<List<DepartamentoCountDTO>> listarDepartamento(){
 		return ResponseEntity.ok(depService.listarDepartamento());
-	}
+	} 
 }

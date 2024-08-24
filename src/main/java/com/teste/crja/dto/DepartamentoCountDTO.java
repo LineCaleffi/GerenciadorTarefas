@@ -25,5 +25,4 @@ public class DepartamentoCountDTO {
 		this.pessoas = departamento.getPessoa().stream().collect(Collectors.counting());
 		this.tarefas = departamento.getTarefa().stream().collect(Collectors.counting());
 	}
-
 }
