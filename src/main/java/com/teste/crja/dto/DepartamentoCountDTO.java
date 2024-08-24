@@ -4,8 +4,6 @@
  */
 package com.teste.crja.dto;
 
-import java.util.stream.Collectors;
-
 import com.teste.crja.entity.DepartamentoEntity;
 
 import lombok.AllArgsConstructor;
@@ -16,13 +14,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DepartamentoCountDTO {
+	private int id;
 	private String titulo;
-	private Long pessoas;
-	private Long tarefas;
+	private int pessoas;
+	private int tarefas;
 
 	public DepartamentoCountDTO(DepartamentoEntity departamento) {
+		this.id = departamento.getId();
 		this.titulo = departamento.getTitulo();
-		this.pessoas = departamento.getPessoa().stream().collect(Collectors.counting());
-		this.tarefas = departamento.getTarefa().stream().collect(Collectors.counting());
+		this.pessoas = departamento.getPessoa().size();
+		this.tarefas = departamento.getTarefa().size();
 	}
 }
