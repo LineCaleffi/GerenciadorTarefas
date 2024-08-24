@@ -37,11 +37,11 @@ public class DepartamentoEntity {
 	private String titulo;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "idDepartamento")
+	@OneToMany
 	private List<PessoaEntity> pessoa;
 	
 	@JsonIgnore
-	@OneToMany (mappedBy = "idDepartamento")
+	@OneToMany
 	private List<TarefaEntity> tarefa;
 	
 	public DepartamentoDTO toDTO() {
