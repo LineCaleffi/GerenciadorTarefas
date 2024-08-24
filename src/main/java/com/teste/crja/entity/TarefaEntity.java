@@ -1,3 +1,7 @@
+/*
+ *  Nome: Aline Caleffi
+ *  Teste de backend da empresa CRJA
+ */
 package com.teste.crja.entity;
 
 import java.time.LocalDate;

@@ -1,13 +1,23 @@
+/*
+ *  Nome: Aline Caleffi
+ *  Teste de backend da empresa CRJA
+ */
 package com.teste.crja.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.modelmapper.ModelMapper;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.teste.crja.dto.DepartamentoDTO;
 
 import lombok.AllArgsConstructor;
@@ -28,6 +38,15 @@ public class DepartamentoEntity {
 	
 	private String titulo;
 	
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({"idDepartamento", "tarefa"})
+	private List<PessoaEntity> pessoa;
+	
+	@JsonIgnore
+	@OneToMany (cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({"idDepartamento", "pessoa"})
+	private List<TarefaEntity> tarefa;
 	public DepartamentoDTO toDTO() {
 		ModelMapper mapper = new ModelMapper();
 		

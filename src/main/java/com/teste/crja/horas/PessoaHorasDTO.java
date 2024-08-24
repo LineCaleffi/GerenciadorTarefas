@@ -1,3 +1,7 @@
+/*
+ *  Nome: Aline Caleffi
+ *  Teste de backend da empresa CRJA
+ */
 package com.teste.crja.horas;
 
 import java.util.stream.Collectors;
