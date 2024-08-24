@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.teste.crja.dto.TarefaDTO;
+import com.teste.crja.entity.TarefaEntity;
 import com.teste.crja.service.TarefaService;
 
 @RestController
@@ -40,6 +41,11 @@ public class TarefaController {
 	@PutMapping(value = "{id}")
 	public ResponseEntity<TarefaDTO> update(@PathVariable int id, @RequestBody TarefaDTO tarefa) {
 		return ResponseEntity.ok().body(tarefaService.update(id, tarefa.toEntity()));
+	}
+	// Pesquisar tarefas sem pessoas alocadas
+	@GetMapping("/pendentes")
+	public ResponseEntity<List<TarefaEntity>> getTarefasSemPessoas(){
+		return ResponseEntity.ok().body(tarefaService.getTarefasSemPessoas());
 	}
 
 	// Alocar uma pessoa na tarefa que tenha o mesmo departamento

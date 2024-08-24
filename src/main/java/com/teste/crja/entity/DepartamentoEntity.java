@@ -6,7 +6,6 @@ package com.teste.crja.entity;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +16,6 @@ import javax.persistence.Table;
 import org.modelmapper.ModelMapper;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.teste.crja.dto.DepartamentoDTO;
 
 import lombok.AllArgsConstructor;
@@ -39,14 +37,13 @@ public class DepartamentoEntity {
 	private String titulo;
 	
 	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL)
-	@JsonIgnoreProperties({"idDepartamento", "tarefa"})
+	@OneToMany(mappedBy = "idDepartamento")
 	private List<PessoaEntity> pessoa;
 	
 	@JsonIgnore
-	@OneToMany (cascade = CascadeType.ALL)
-	@JsonIgnoreProperties({"idDepartamento", "pessoa"})
+	@OneToMany (mappedBy = "idDepartamento")
 	private List<TarefaEntity> tarefa;
+	
 	public DepartamentoDTO toDTO() {
 		ModelMapper mapper = new ModelMapper();
 		

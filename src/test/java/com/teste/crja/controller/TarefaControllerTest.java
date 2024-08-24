@@ -5,9 +5,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 import java.nio.charset.StandardCharsets;
-import java.time.format.DateTimeFormatter;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,7 +19,6 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.teste.crja.dto.TarefaDTO;
-import com.teste.crja.repositories.TarefaRepository;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -73,5 +70,4 @@ public class TarefaControllerTest {
 
 		assertThat(result.getResponse().getStatus()).isEqualTo(200);
 	}
-
 }
