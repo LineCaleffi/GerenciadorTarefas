@@ -33,3 +33,6 @@ Funcionalidades:
 - Adicionar um tarefa (post/tarefas)
 - Finalizar a tarefa (put/tarefas/finalizar/{id})
 - Alocar uma pessoa na tarefa que tenha o mesmo departamento (put/tarefas/alocar/{id})
+
+## Subir projeto
+Para subir o projeto em sua maquina basta fazer o clone do projeto, no caso eu utilizei o eclipse para abrir, certificar que exista a porta "3306" no banco de dados e executa-lo em formato springboot.
