@@ -11,7 +11,7 @@ Aline Caleffi
 - Persistência de Dados: JPA
 - Gerenciador de Dependências: Maven
 
-## Funcionalidades desejadas:
+## Objetivo do projeto:
 
 Precisamos criar uma API de gerenciamento de tarefas para disponibilizar para nossa equipe de front.
 
