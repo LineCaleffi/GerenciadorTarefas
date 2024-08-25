@@ -5,11 +5,11 @@ Realizando um projeto de backend para a empresa CRJA Consultoria.
 Aline Caleffi
 
 ## Tecnologias Utilizadas
-*Linguagem: Java
-*Framework: SpringBoot
-*Banco de dados: Mysql
-*Persistência de Dados: JPA
-*Gerenciador de Dependências: Maven
+- Linguagem: Java
+- Framework: SpringBoot
+- Banco de dados: Mysql
+- Persistência de Dados: JPA
+- Gerenciador de Dependências: Maven
 
 ## Funcionalidades desejadas:
 
