@@ -1,5 +1,5 @@
 ## Gerenciador de tarefas
-Realizando um projeto de backend para a empresa CRJA Consultoria. 
+Realizando um projeto de backend
 
 ## Desenvolvedor
 Aline Caleffi
